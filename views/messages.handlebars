@@ -1,0 +1,28 @@
+<h1>for now you get to see all the messages that run on the server memory. We use Heroku service for that</h1>
+<p>list of all messages</p>
+<div id='ulId' class="messages-container">
+  <ul>
+    {{#each msg}}
+    <p>{{users}}:{{this}}</p>
+    {{/each}}
+  </ul>
+</div>
+<div class="button-container">
+  <a class='test' href="/admin/add-message"><button onclick="seturl()">add message</button></a>
+  <a href="/"><button>go back home</button></a>
+</div>
+
+<script>
+  function setUrl() {
+
+    const href = document.querySelector('.test');
+    href.href += '/' + window.location.search;
+  }
+  setUrl()
+  setInterval(() => {
+    location.reload();
+  }, 5000)
+  const scrolled = false;
+  const element = document.getElementById("ulId");
+  element.scrollTop = element.scrollHeight
+</script>
