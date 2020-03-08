@@ -1,14 +1,21 @@
-const { msg, users } = require("../users");
+const { users } = require("../../users");
 
 module.exports = {
   userMsg: (req, res) => {
-    res.render("messages", { msg, users });
+    console.log(users);
+    res.render("messages", { users });
   },
   showAll: (req, res) => {
     const { message } = req.body;
+    req.session.newMessage = message;
+    const { userNew } = req.session;
+    const { newMessage } = req.session;
 
-    console.log(message);
-    msg.push(message);
+    if (message === "") {
+      return res.redirect("/new_user");
+    }
+
+    users.push({ userNew, newMessage });
     res.redirect("/messages");
   }
 };

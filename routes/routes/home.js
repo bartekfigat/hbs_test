@@ -1,4 +1,4 @@
-const { users } = require("../users");
+const { users } = require("../../users");
 
 module.exports = {
   newUser: (req, res) => {
@@ -7,7 +7,13 @@ module.exports = {
 
   newUserPost: (req, res) => {
     const { user } = req.body;
-    users.push(user);
+
+    req.session.userNew = user;
+
+    if (user === "") {
+      return res.redirect("/");
+    }
+
     res.redirect("/new_user");
   }
 };

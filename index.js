@@ -1,21 +1,30 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const indexRoutes = require("./routes/index");
+const session = require("express-session");
+const indexRoutes = require("./routes/routes/index");
 const path = require("path");
-const hdb = require("express-handlebars");
+const hbs = require("express-handlebars");
 const app = express();
 const port = process.env.PORT || 3333;
 
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
 app.engine(
   "handlebars",
-  hdb({
+  hbs({
     layoutsDir: "views/layouts",
     defaultLayout: "main",
     extname: "handlebars"
   })
 );
-
 app.set("view engine", "handlebars");
+
 //app.set('views', 'views');
 
 app.use(express.static(path.join(__dirname, "public")));

@@ -1,18 +1,18 @@
 const express = require("express");
 router = express.Router();
 
-const home = require("./home");
-const admin = require("./admin");
-const show = require("./show");
+const { newUser, newUserPost } = require("./home");
+const { newMSG } = require("./admin");
+const { userMsg, showAll } = require("./show");
 
-router.get("/", home.newUser);
+router.get("/", newUser);
 
-router.get("/new_user", admin.newMSG);
+router.get("/new_user", newMSG);
 
-router.post("/new_user", home.newUserPost);
+router.post("/new_user", newUserPost);
 
-router.get("/messages", show.userMsg);
+router.get("/messages", userMsg);
 
-router.post("/messages", show.showAll);
+router.post("/messages", showAll);
 
 module.exports = router;
